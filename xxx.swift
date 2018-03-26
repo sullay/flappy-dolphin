@@ -46,6 +46,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
    let pipeCategory: UInt32 = 1 << 2  //4
    let scoreCategory: UInt32 = 1 << 3  //8
    
+   /// 场景加载完毕后自动调用
    override func didMove(to view: SKView) {
        
        skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
@@ -117,6 +118,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
        self.idleStatus()
        
    }
+   // 初始化
    func idleStatus() {
        gameStatus = .idle
        
@@ -132,6 +134,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
        // 重新开始动画
        moving.speed = 1
    }
+   // 运行
    func runningStatus() {
        gameStatus = .running
        
@@ -148,6 +151,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
        
        startCreateRandomPipes()
    }
+   // 游戏结束
    func overStatus() {
        gameStatus = .over
        
@@ -161,7 +165,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
        
        setupScoreCard()
    }
-   
+   // 手指按下事件
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        switch gameStatus {
        case .idle:
@@ -196,6 +200,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
    /// SKPhysicsContact对象是包含着碰撞的两个物理体的,分别是bodyA和bodyB
    ///
    /// - Parameter contact: SKPhysicsContact
+   // 碰撞回调函数
    func didBegin(_ contact: SKPhysicsContact) {
        
        if gameStatus != .running {
